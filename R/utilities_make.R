@@ -12,7 +12,12 @@
 #'
 #' @name utilities-make
 #' @keywords internal
-clean_otn_deployment <- function(deployment) {
+clean_otn_deployment <- function(deployment,
+                                 glatos = FALSE) {
+  if (glatos == TRUE) {
+    clean_glatos_deployments(deployment)
+  }
+
   file_ext <- gsub(".*\\.", "", deployment)
   if (grepl("^xls", file_ext)) {
     # Find which sheet has deployment data. If none are explicitly labeled, assume
