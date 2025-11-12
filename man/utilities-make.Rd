@@ -3,6 +3,7 @@
 \name{utilities-make}
 \alias{utilities-make}
 \alias{clean_otn_deployment}
+\alias{clean_glatos_deployments}
 \alias{convert_times}
 \alias{provided_file_unzip}
 \alias{write_to_tempdir}
@@ -10,7 +11,9 @@
 \alias{copy_from_temp}
 \title{Place where functions live for the make_*_summary family of functions}
 \usage{
-clean_otn_deployment(deployment)
+clean_otn_deployment(deployment, glatos = FALSE)
+
+clean_glatos_deployments(deployment)
 
 convert_times(date_time)
 
@@ -24,6 +27,8 @@ copy_from_temp(report, code, td, out_dir, overwrite)
 }
 \arguments{
 \item{deployment}{Character. File path of deployment metadata.}
+
+\item{glatos}{Logical. If \code{TRUE} then GLATOS data is being supplied.}
 
 \item{date_time}{Character or numeric. Date-time to convert.}
 

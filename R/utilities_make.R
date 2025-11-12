@@ -9,6 +9,7 @@
 #' @param report Character. Type of report ("tag" or "receiver").
 #' @param out_dir Character. Output directory.
 #' @param code Character. Project code.
+#' @param glatos Logical. If `TRUE` then GLATOS data is being supplied.
 #'
 #' @name utilities-make
 #' @keywords internal
