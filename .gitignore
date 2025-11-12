@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 docs
-
 files_for_testing/
 inst/doc
+data-raw
+.DS_Store
