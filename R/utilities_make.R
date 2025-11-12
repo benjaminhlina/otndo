@@ -19,6 +19,8 @@ clean_otn_deployment <- function(deployment,
   }
 
   file_ext <- gsub(".*\\.", "", deployment)
+  check_file_type(file_ext)
+
   if (grepl("^xls", file_ext)) {
     # Find which sheet has deployment data. If none are explicitly labeled, assume
     #   it's sheet 1
@@ -48,8 +50,6 @@ clean_otn_deployment <- function(deployment,
     } else {
       deployment <- read.csv(deployment, na.strings = c("NA", ""))
     }
-  } else {
-    cli::cli_abort("File type is not xls, xlsx, or csv.")
   }
 
   # Drop everything after a space in an Excel sheet; read.csv converts spaces
