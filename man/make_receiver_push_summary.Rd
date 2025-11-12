@@ -11,6 +11,7 @@ make_receiver_push_summary(
   deployment = NULL,
   out_dir = getwd(),
   since = NULL,
+  glatos = NULL,
   rmd = FALSE,
   overwrite = FALSE
 )
@@ -25,6 +26,9 @@ make_receiver_push_summary(
 \item{out_dir}{Defaults to working directory. In which directory would you like to save the report?}
 
 \item{since}{Date in YYYY-MM-DD format. Summarizes what's new since the provided date.}
+
+\item{glatos}{Logical, default is \code{FALSE}. If \code{TRUE} the fucnction will make a report
+using  GLATOS detection extraction instead of an OTN edetection extract.}
 
 \item{rmd}{Logical. Compile via RMarkdown rather than Quarto?}
 

@@ -5,6 +5,8 @@
 #' @param deployment File path of user-supplied master OTN receiver deployment metadata.
 #' @param out_dir Defaults to working directory. In which directory would you like to save the report?
 #' @param since Date in YYYY-MM-DD format. Summarizes what's new since the provided date.
+#' @param glatos Logical, default is `FALSE`. If `TRUE` the fucnction will make a report
+#' using  GLATOS detection extraction instead of an OTN edetection extract.
 #' @param rmd Logical. Compile via RMarkdown rather than Quarto?
 #' @param overwrite Logical. Overwrite existing file?
 #'
@@ -86,6 +88,7 @@ make_receiver_push_summary <- function(
     deployment = NULL,
     out_dir = getwd(),
     since = NULL,
+    glatos = NULL,
     rmd = FALSE,
     overwrite = FALSE) {
   # Try to provide a helpful error if there are missing files.
