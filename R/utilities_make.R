@@ -95,6 +95,59 @@ clean_otn_deployment <- function(deployment,
 
 #' @rdname utilities-make
 #' @keywords internal
+clean_glatos_deployments <- function(deployment) {
+
+  file_ext <- gsub(".*\\.", "", deployment)
+  check_file_type(file_ext)
+
+  if (grepl("^csv", file_ext)) {
+    deployment <- read.csv(deployment)
+  } else{
+
+  }
+
+  # ---- remove deployment times not record
+  deployment <- deployment[!is.na(deployment$deploy_date_time), ]
+  # ----- recovery times have "" in them so we need to make those NA
+  # then remove
+  deployment$recover_date_time[deployment$recover_date_time == ""] <- NA
+  deployment <- deployment[!is.na(deployment$recover_date_time), ]
+
+
+  deployment$deploy_date_time <- convert_times(deployment$deploy_date_time)
+  deployment$recover_date_time <- convert_times(deployment$recover_date_time)
+
+  # make sure all na in date and time are gone
+  deployment <- deployment[
+    !is.na(deployment$deploy_date_time) &
+      !is.na(deployment$recover_date_time),
+  ]
+
+  # make receiver which is ins_mod_no and serial non
+  deployment$receiver <- paste(
+    deployment$ins_model_no,
+    deployment$ins_serial_no,
+    sep = "-"
+  )
+  # make station name - this in glatos is station
+  deployment$stationname <- deployment$station
+
+  # glatos does not record internal transmitters in deployment sheet
+  # if these are to be rocreded they are in tagging sheet but most are not
+  # recorded - via comm. w/ Nancy
+
+  deployment[, c(
+    "stationname",
+    "receiver",
+    "deploy_date_time",
+    "deploy_lat",
+    "deploy_long",
+    "recover_date_time"
+  )]
+}
+
+#' @rdname utilities-make
+#' @keywords internal
 convert_times <- function(date_time) {
   check_times <- function(x) {
     # check if Excel format
