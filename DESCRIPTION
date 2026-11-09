@@ -1,6 +1,6 @@
 Package: otndo
 Title: Understand your OTN data
-Version: 0.3.4
+Version: 0.5.2
 Authors@R: 
     person("Michael", "O'Brien", , "mike@obrien.page", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1420-6395"))
@@ -13,22 +13,26 @@ RoxygenNote: 7.3.3
 URL: https://mhpob.github.io/otndo/,
     https://otndo.obrien.page/
 BugReports: https://github.com/mhpob/otndo/issues
-Depends: R (>= 4.1.0)
+Depends: R (>= 4.3.0)
 Imports: 
+    arrow,
     cli,
     data.table,
     ggplot2,
-    reactable,
-    sf,
-    mapview,
+    grDevices,
+    htmlwidgets,
     quarto,
     readxl,
+    reactable,
     rmarkdown,
     utils
 Suggests: 
     curl,
     knitr,
+    sf,
     testthat (>= 3.0.0),
     writexl
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
+LazyData: true

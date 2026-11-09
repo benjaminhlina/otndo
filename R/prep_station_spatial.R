@@ -44,31 +44,34 @@ prep_station_spatial <- function(extract, type = c("tag", "receiver")) {
     station_spatial <- unique(extract, by = "station")
   }
 
-
   station_spatial <- station_spatial[
-    station_summary[, Station := toupper(Station)], ,
+    station_summary[, Station := toupper(Station)],
+    ,
     on = c("station" = "Station")
   ]
 
-
+  col_names <- c(
+    "station",
+    "Detections",
+    "Individuals",
+    "longitude",
+    "latitude"
+  )
   if (type == "tag") {
-    station_spatial <- station_spatial[, .(
-      station, Detections, Individuals,
-      longitude, latitude, PI, detectedby
-    )]
+    col_names <- c(col_names, "PI", "detectedby")
+
+    if ("Species" %in% names(station_summary)) {
+      col_names <- c(col_names, "Species")
+    }
+
+    station_spatial <- station_spatial[, ..col_names]
   } else {
-    station_spatial <- station_spatial[, .(
-      station, Detections, Individuals, longitude, latitude
-    )]
+    if ("Species" %in% names(station_summary)) {
+      col_names <- c(col_names, "Species")
+    }
+
+    station_spatial <- station_spatial[, ..col_names]
   }
 
-  sf::st_as_sf(
-    station_spatial,
-    coords = c("longitude", "latitude"),
-    crs = 4326
-  )
-
-  # For use if switching to leaflet
-  # station_center <- st_centroid(st_union(station_spatial))
-  # station_center <- st_coordinates(station_center)
+  station_spatial
 }
